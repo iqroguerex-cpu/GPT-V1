@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RogueGPT</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="chat-app">
+    <header>
+      <h1>RogueGPT</h1>
+      <button id="clear-btn" type="button">Clear Chat</button>
+    </header>
+
+    <main id="chat-box" aria-live="polite">
+      <% if (chatHistory && chatHistory.length > 0) { %>
+        <% chatHistory.forEach(msg => { %>
+          <div class="message <%= msg.role %>">
+            <p><%- msg.content %></p>
+            <span class="timestamp"><%= new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %></span>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="intro">
+          <h3>A Creation Of ChinmayVC</h3>
+          <p>Database and Authentication coming soon......</p>
+        </div>
+      <% } %>
+    </main>
+
+    <footer>
+      <form id="chat-form">
+        <textarea id="message-input" name="message" placeholder="Type a message..." aria-label="Message"></textarea>
+        <button id="send-btn" type="submit">Send</button>
+      </form>
+    </footer>
+  </div>
+
+  <script>
+    // Helpers
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    const chatBox = document.getElementById("chat-box");
+    const chatForm = document.getElementById("chat-form");
+    const textarea = document.getElementById("message-input");
+    const clearBtn = document.getElementById("clear-btn");
+
+    function scrollToBottom() {
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Create message DOM element
+    function createMessageElement(role, htmlContent, timestamp) {
+      const el = document.createElement("div");
+      el.className = "message " + (role === "user" ? "user" : "ai");
+      const p = document.createElement("p");
+      p.innerHTML = htmlContent; 
+      el.appendChild(p);
+
+      const ts = document.createElement("span");
+      ts.className = "timestamp";
+      ts.textContent = new Date(timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      el.appendChild(ts);
+      return el;
+    }
+
+    // Typing placeholder (three-dot animation)
+    function createTypingPlaceholder() {
+      const el = document.createElement("div");
+      el.className = "message ai typing";
+
+      const p = document.createElement("p");
+      const dots = document.createElement("span");
+      dots.className = "typing-dots";
+      dots.innerHTML = "<span></span><span></span><span></span>";
+      p.appendChild(dots);
+      el.appendChild(p);
+
+      const ts = document.createElement("span");
+      ts.className = "timestamp";
+      ts.textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      el.appendChild(ts);
+
+      return el;
+    }
+
+    // Typing animation (streaming effect)
+    function typeWriter(el, html, done) {
+      el.innerHTML = "";
+      let i = 0;
+      const interval = setInterval(() => {
+        el.innerHTML = html.slice(0, i) + (i % 2 ? "▋" : "");
+        i++;
+        scrollToBottom();
+        if (i > html.length) {
+          clearInterval(interval);
+          el.innerHTML = html; // final clean
+          if (done) done();
+        }
+      }, 20); // typing speed
+    }
+
+    // Handle form submit with fetch
+    chatForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const message = textarea.value.trim();
+      if (!message) return;
+
+      // Clear textarea
+      textarea.value = "";
+      textarea.focus();
+
+      // 1) Add user message immediately
+      const safeHtml = escapeHtml(message).replace(/\n/g, "<br>");
+      const userEl = createMessageElement("user", safeHtml, Date.now());
+      chatBox.appendChild(userEl);
+      scrollToBottom();
+
+      // 2) Add typing placeholder
+      const typingEl = createTypingPlaceholder();
+      chatBox.appendChild(typingEl);
+      scrollToBottom();
+
+      // 3) Send to server
+      try {
+        const resp = await fetch("/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message }),
+        });
+
+        const data = await resp.json();
+
+        // Remove typing placeholder
+        typingEl.remove();
+
+        if (resp.ok) {
+          // AI element with empty bubble (will be filled via typing animation)
+          const aiEl = createMessageElement("ai", "", data.timestamp || Date.now());
+          chatBox.appendChild(aiEl);
+          const bubble = aiEl.querySelector("p");
+          typeWriter(bubble, data.aiReply);
+        } else {
+          const errHtml = escapeHtml(data.error || "Server error");
+          const aiEl = createMessageElement("ai", errHtml, Date.now());
+          chatBox.appendChild(aiEl);
+        }
+      } catch (err) {
+        typingEl.remove();
+        const aiEl = createMessageElement("ai", escapeHtml("Network error"), Date.now());
+        chatBox.appendChild(aiEl);
+      }
+
+      scrollToBottom();
+    });
+
+    // Enter to send (Shift+Enter -> newline)
+    textarea.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        chatForm.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+      }
+    });
+
+    // Clear chat
+    clearBtn.addEventListener("click", async () => {
+      try {
+        await fetch("/clear", { method: "POST" });
+        window.location.reload();
+      } catch {}
+    });
+
+    // Auto-scroll when new DOM nodes appear
+    const observer = new MutationObserver(scrollToBottom);
+    observer.observe(chatBox, { childList: true, subtree: true });
+  </script>
+</body>
+</html>
