@@ -22,7 +22,7 @@ app.use(
   })
 );
 
-const selectedModel = "openrouter/sonoma-sky-alpha";
+const selectedModel = "meituan/longcat-flash-chat:free";
 
 function escapeHtml(unsafe) {
   if (!unsafe) return "";
@@ -104,3 +104,4 @@ app.post("/clear", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
