@@ -14,9 +14,8 @@ It lets you ask questions, get markdown-rendered answers, and enjoy a sleek chat
 
 ---
 
-## 🚀 Live Demo
+## 🚀 Live Demo  **(Note: Wait about 10 Minutes for The Site To Render.)**
 **[![Live Site](https://img.shields.io/badge/🌐_Live_Demo-Visit_Now-blue?style=for-the-badge)](https://gpt1-aebs.onrender.com/)**
-**Note: Wait about 10 Minutes for The Site To Render.**
 
 ---
 
