@@ -4,7 +4,7 @@
 ![Express](https://img.shields.io/badge/Express.js-Backend-black?logo=express)
 ![EJS](https://img.shields.io/badge/EJS-Templating-orange?logo=ejs)
 ![Status](https://img.shields.io/badge/Status-Live-brightgreen)
-[![Live Site](https://img.shields.io/badge/🌐_Live_Demo-Visit_Now-blue?style=for-the-badge)](https://odyssey-kw11.onrender.com)
+[![Live Site](https://img.shields.io/badge/🌐_Live_Demo-Visit_Now-blue?style=for-the-badge)](https://gpt1-aebs.onrender.com/)
 
 ---
 
