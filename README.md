@@ -9,7 +9,7 @@
 ---
 
 ## 🪄 Overview
-**RogueGPT/V1** is a lightweight, real-time AI chat application built with **Express.js**, **EJS**, and **OpenRouter AI**.  
+**RogueGPT-V1** is a lightweight, real-time AI chat application built with **Express.js**, **EJS**, and **OpenRouter AI**.  
 It lets you ask questions, get markdown-rendered answers, and enjoy a sleek chat interface — all powered by a session-based conversation system.  
 
 ---
@@ -56,5 +56,5 @@ This project is licensed under the **MIT License** — feel free to use and modi
 
 ## 🌟 Support
 
-If you like **GPT-V1**, please consider **starring ⭐ this repository** — it helps more people discover it!
+If you like **RogueGPT-V1**, please consider **starring ⭐ this repository** — it helps more people discover it!
 
