@@ -1,4 +1,4 @@
-# 🤖 GPT-V1 — Smart Chat Companion
+# 🤖 RogueGPT — Smart Chat Companion(V1)
 
 ![Node.js](https://img.shields.io/badge/Node.js-v18+-green?logo=node.js)
 ![Express](https://img.shields.io/badge/Express.js-Backend-black?logo=express)
@@ -9,7 +9,7 @@
 ---
 
 ## 🪄 Overview
-**Odyssey AI** is a lightweight, real-time AI chat application built with **Express.js**, **EJS**, and **OpenRouter AI**.  
+**RogueGPT/V1** is a lightweight, real-time AI chat application built with **Express.js**, **EJS**, and **OpenRouter AI**.  
 It lets you ask questions, get markdown-rendered answers, and enjoy a sleek chat interface — all powered by a session-based conversation system.  
 
 ---
