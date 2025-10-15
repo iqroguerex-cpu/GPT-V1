@@ -39,62 +39,12 @@ It lets you ask questions, get markdown-rendered answers, and enjoy a sleek chat
 🚫 One-click “Clear Chat” functionality  
 ⚡ Fast and lightweight architecture  
 
----
 
-## 🛠️ Installation
-
-Clone the repository:
-```bash
-git clone https://github.com/yourusername/odyssey-ai.git
-cd odyssey-ai
-Install dependencies:
-
-bash
-Copy code
-npm install
-Create a .env file:
-
-bash
-Copy code
-OPENROUTER_API_KEY=your_api_key_here
-SESSION_SECRET=your_secret_here
-Run the server:
-
-bash
-Copy code
-npm start
-Visit the app:
-
-arduino
-Copy code
-http://localhost:3000
-🧠 Environment Variables
-Variable	Description
-OPENROUTER_API_KEY	Your API key from OpenRouter.ai
-SESSION_SECRET	Secret for Express sessions
-PORT	(Optional) Custom port, defaults to 3000
-
-🖼️ Screenshots
-(Optional — you can add images here once deployed)
-Example:
-
-markdown
-Copy code
-![Odyssey Chat UI](public/assets/screenshot1.png)
-💡 Future Enhancements
-🗂️ Add multiple model support
-
-🌙 Dark mode UI
-
-🧾 Export chat as PDF/Word
-
-⚙️ Conversation tagging
-
-👨‍💻 Author
+##👨‍💻 Author
 Chinmay Chatradamath
 🔗 LinkedIn • GitHub
 
-📜 License
+##📜 License
 This project is licensed under the MIT License — feel free to use and modify.
 
-🌟 Star this repo if you like Odyssey AI!
+##🌟 Star this repo if you like Odyssey AI!
