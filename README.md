@@ -32,19 +32,29 @@ It lets you ask questions, get markdown-rendered answers, and enjoy a sleek chat
 ---
 
 ## 🧩 Features
-✨ Clean & modern EJS UI  
-🧠 AI-powered chat responses via OpenRouter  
-💬 Persistent session-based chat history  
-🪶 Markdown & HTML-safe rendering  
-🚫 One-click “Clear Chat” functionality  
-⚡ Fast and lightweight architecture  
 
+- ✨ **Clean & Modern EJS UI**
+- 🧠 **AI-powered chat responses** via OpenRouter
+- 💬 **Persistent session-based** chat history
+- 🪶 **Markdown & HTML-safe** rendering
+- 🚫 **One-click “Clear Chat”** functionality
+- ⚡ **Fast and lightweight** architecture
 
-##👨‍💻 Author
-Chinmay Chatradamath
-🔗 LinkedIn • GitHub
+---
 
-##📜 License
-This project is licensed under the MIT License — feel free to use and modify.
+## 👨‍💻 Author
 
-##🌟 Star this repo if you like Odyssey AI!
+**Chinmay Chatradamath**  
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License** — feel free to use and modify.
+
+---
+
+## 🌟 Support
+
+If you like **GPT-V1**, please consider **starring ⭐ this repository** — it helps more people discover it!
+
